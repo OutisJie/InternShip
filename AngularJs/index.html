@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>学习AnularJs</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/main.css">
+
+        
+    </head>
+    <body ng-app="appModule">
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <script src="node_modules/angular/angular.js"></script>
+        <script src="js/app.js"></script>
+      
+
+        <gq-tab-container>
+            <gq-tab-content title="标签1">
+                <h4>标题1</h4>
+                <p>这是第一个标签</p>
+            </gq-tab-content>
+            <gq-tab-content title="标签2">
+                    <h4>标题2</h4>
+                    <p>这是第二个标签</p>
+                </gq-tab-content>
+        </gq-tab-container>
+
+        <script type="text/ng-template" id="gqTabList">
+
+            <ul>
+                <li ng-repeat="pane in panes" ng-class="{active:pane.selected}">
+                    <a href="" ng-click="select(pane)">{{pane.title}}</a>
+                </li>
+            </ul>
+            <div ng-transclude></div>
+        
+        </script>
+        
+        <script type="text/ng-template" id="gqTabContent">
+        
+            <div ng-show="selected" ng-transclude>
+            </div>
+        
+        </script>
+    </body>
+</html>

@@ -1,5 +1,8 @@
 <template>
-  <div id="app">
+  
+  <div class="app">
+
+    <user-name name="Wujie"></user-name>
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
@@ -9,7 +12,7 @@
 </template>
 
 <style>
-#app {
+.app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

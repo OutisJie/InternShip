@@ -1,3 +1,5 @@
+
+
 # vue3-example
 
 ## Project setup
@@ -149,3 +151,83 @@ module.exports = {
 重启serve之后再vue inspect就能看到vue的版本变了。
 
 当然，在一个完整的vue项目里面，用这个是ok的，但是如果只是运行了一个单页面，就是上一个小标题所说的，在声明组件的时候用template也会报错，但是如果我在单页面所在的目录下加上vue.config.js文件之后，vue serve app.vue会报错说无法找到入口，暂时不知道该怎么解决，还需要进一步学习render的用法。。。。
+
+## 单页面组件
+
+一般来说，一个.vue文件就代表一个组件，这个是依赖于webpack的配置，所以，这种模式不适用于single-page app。
+
+在单个页面里面使用CSS的时候，可能会影响到别的组件的CSS，这个可以用<style scoped>标签来解决。如果不声明作用于，那么定义的CSS是全局的，声明scope之后，Vue会自动的为当前组件添加一个类，这个类包含所有声明的样式，类似less.
+
+特别的，如果想将js和css单独拿出来作为文件，可以使用以下的方法：
+
+```html
+<template>
+  <p>
+      {{hello}}
+  </p>
+</template>
+<script src="./hello.js"></script>
+<script src="./hello.css"></script>
+```
+
+对于单页面组件，data需要声明为一个方法
+
+```javascript
+export default {
+  data: () => {//箭头函数，对匿名函数/行内行数的this指向问题做了修改。箭头函数this指向声明当前函数的上下文所在的域，行内行数指向的是该上下文父级域（这段总结来自某次阿里面试，对面那个大佬教的=_=），其实vue的官方文档里说了最好不要用箭头函数
+    return {
+      name: "wujie"
+    }
+  }
+}
+```
+
+对于CSS，还可以使用computed来声明
+
+```vue
+<template>
+<div class="home">
+    <p :style="styling">Hi Wujie</p>
+</div>
+</template>
+
+<script>
+export default {
+    name: "home",
+    data: function() {
+        return {
+            name: this.getName(),
+            textDecoration: 'underline',
+            textWeight: 'bold'
+        }
+    },
+    methods: {
+      getName: function(){
+        return "wujie"
+      }
+    },
+    computed: {
+      styling: function() {
+        return {
+          textDecoration: this.textDecoration,
+          textWeight: this.textWeight
+        }
+      }
+    }
+};
+</script>
+```
+
+有没有发现这里的data是一个普通函数，this指向当前组件，没问题，但是换成箭头函数会报错！！为什么呢，因为如果使用箭头函数，就不能获取到methods的getName()方法，console.log(this)居然是undefined！！其实在methods中使用箭头函数声明函数也是undefined
+
+等等，这跟阿里大佬说的不太一样啊，这里句柄不是data吗？那箭头函数的this不是指向data所在的域也就是当前组件吗？
+
+好的接下来是个人推测，鬼知道是对是错=_=
+
+在Vue里面，data和methods一样，在创建的时候都会被混入到Vue实例中，里面的属性和方法可以直接通过this访问，而data和methods方法中的this会被自动的绑定为Vue实例。
+
+官方文档：“注意，**不应该使用箭头函数来定义 method 函数** (例如 `plus: () => this.a++`)。理由是箭头函数**绑定了父级作用域的上下文**，所以 `this` 将不会按照期望指向 Vue 实例，`this.a` 将是 undefined。”
+
+这里的箭头函数，会返回一个绑定当前执行上下文中的this（要不干脆理解为data或者methods的内部域），而且这个this，Vue无法识别并自动绑定到实例中，所以会是undefined。
+
+啊，天啊，受不了了，头痛

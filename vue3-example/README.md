@@ -231,3 +231,115 @@ export default {
 这里的箭头函数，会返回一个绑定当前执行上下文中的this（要不干脆理解为data或者methods的内部域），而且这个this，Vue无法识别并自动绑定到实例中，所以会是undefined。
 
 啊，天啊，受不了了，头痛
+
+
+
+## 指令
+
+#### v-text： 
+
+v-text="name"和使用{{name}}的效果一样，主要用于操作元素中的纯文本
+
+1. 这里的双引号不是字符串的意思，而是vue自定义的划定界限的符号。如果需要输出字符串，就需要在里面再添加单引号。
+2. {{}}代表的就是“”
+3. 当网速很慢或者js报错的时候，{{name}}会直接在页面上渲染出来，而使用v-text时，如果出错是不会显示的
+
+#### v-html:
+
+主要用于操作元素中的HTML标签，v-text会将元素当成HTML标签解析后输出
+
+```html
+<div id="app" v-html="message"></div>
+var app = new Vue({
+	el: "#app",
+data: {
+	message: "<img src='img/a.jpg' width='200px'>"//显示图片
+}
+})
+```
+
+过多的使用v-html可能会导致XSS攻击，所以尽量少用。
+
+##### XSS攻击是什么？
+
+​	跨站脚本攻击（Cross Site Scripting）, XSS攻击通常指的是通过利用网页开发是留下的漏洞，恶意攻击者往Web页面插入恶意Script代码，当用户浏览时，嵌入其中Web里面的script代码会被执行，从而达到恶意攻击用户的目的。
+
+危害：
+
+- 流量劫持
+- 获取用户的cookie信息，盗取账号
+- 篡改、删除页面信息
+- 配合CSRF攻击，实施进一步的攻击
+- 。。。
+
+其余就不去了解了，先回头看vue
+
+#### v-bind:
+
+绑定标签属性， ：符号后面是标签属性名
+
+```html
+<div id = "app">
+  <span v-bind:title = 'message'>鼠标悬停查看动态绑定的信息</span>
+</div>
+var app = new Vue({
+	el: '#app,
+    data: {
+		message: '加载于' + new Date()
+    }
+})
+```
+
+#### v-once:
+
+页面元素和组件只会渲染一次，每次页面重新渲染的时候，该组件以及它所有的子节点都会被视为静态内容并跳过：
+
+```html
+<div id='app'>
+  <span v-once>this will never change:{{message}}</span>
+  <!--包含子元素-->
+  <div v-once>
+    <hi>{{message}}</hi>
+    <p>
+      {{name}}
+    </p>
+  </div>
+</div>
+<script>
+  var app = new Vue({
+    el: "#app",
+    data: {
+      message: "nihao",
+      name: "wujie"
+    }
+  })
+</script>
+```
+
+#### v-modal:
+
+双向绑定，懒得写了
+
+#### v-for:
+
+我好困啊
+
+```html
+<li v-for="(param1, param2) in list">param1表示元素，param2表示index</li>
+```
+
+#### v-on:
+
+```
+v-on:click="handleClick('test')"
+```
+
+#### v-if/v-show:
+
+区别在于if会只把显示的组件加到DOM文件中，之后不会再出现；show会添加到DOM中，只不过隐藏了起来，之后可以再通过交互显示出来。
+
+
+
+## 自定义指令
+
+## 事件处理

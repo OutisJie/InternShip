@@ -1,0 +1,41 @@
+{
+    "name": "/",
+    "children": [
+      {
+        "name": "music",
+        "children": [
+          {
+            "name": "1.md",
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "workspace",
+        "children": [
+          {
+            "name": "2.md",
+            "children":[]
+          }
+        ]
+      },
+      {
+        "name": "workspace1",
+        "children": [
+          {
+            "name": "2.js",
+            "children":[]
+          }
+        ]
+      },
+      {
+        "name": "workspace2",
+        "children": [
+          {
+            "name": "2.json",
+            "children":[]
+          }
+        ]
+      }
+    ]
+  }

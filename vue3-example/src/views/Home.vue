@@ -1,31 +1,36 @@
 <template>
 <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-    <p :style="styling">Hi Wujie</p>
+    <user-name name="A Vue Tree Browser"></user-name>
+    <TreeBrowser :node="root" @onClick="onfileClick"> </TreeBrowser>
 </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
+import  TreeBrowser from "@/components/TreeBrowser.vue";
+import root from "../assets/root.json"
 
 export default {
     name: "home",
     components: {
-        HelloWorld
+        HelloWorld,
+        TreeBrowser
     },
     data: ()=> {
-      console.log(this);
         return {
             //name: this.getName(),
             textDecoration: 'underline',
-            textWeight: 'bold'
+            textWeight: 'bold',
+            root
         }
     },
     methods: {
       getName: function(){
         return "wujie"
+      },
+      onfileClick: function(node){
+        alert(node.name);
       }
     },
     computed: {

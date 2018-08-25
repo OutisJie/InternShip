@@ -1,6 +1,8 @@
-
-
 # vue3-example
+
+
+
+
 
 ## Project setup
 ```
@@ -152,9 +154,27 @@ module.exports = {
 
 当然，在一个完整的vue项目里面，用这个是ok的，但是如果只是运行了一个单页面，就是上一个小标题所说的，在声明组件的时候用template也会报错，但是如果我在单页面所在的目录下加上vue.config.js文件之后，vue serve app.vue会报错说无法找到入口，暂时不知道该怎么解决，还需要进一步学习render的用法。。。。
 
-## 单页面组件
+## 简单的Vue组件
 
 一般来说，一个.vue文件就代表一个组件，这个是依赖于webpack的配置，所以，这种模式不适用于single-page app。
+
+有个非常重要的观念：组件是可以复用的，也是可以递归调用的，即在组件内引用自己。因为组件是可复用的，所以他们的data、computed、wath、methods以及生命钩子都是相同的，各个实例各自维护一份属于自己的拷贝。
+
+### data
+
+无论如何，data需要声明为一个方法。因为方法会返回一个对象，所以每个实例可以在拿到返回的对象的时候创建一份独立的拷贝。
+
+```javascript
+export default {
+  data: () => {//箭头函数，对匿名函数/行内行数的this指向问题做了修改。箭头函数this指向声明当前函数的上下文所在的域，行内行数指向的是该上下文父级域（这段总结来自某次阿里面试，对面那个大佬教的=_=），其实vue的官方文档里说了最好不要用箭头函数
+    return {
+      name: "wujie"
+    }
+  }
+}
+```
+
+### CSS
 
 在单个页面里面使用CSS的时候，可能会影响到别的组件的CSS，这个可以用<style scoped>标签来解决。如果不声明作用于，那么定义的CSS是全局的，声明scope之后，Vue会自动的为当前组件添加一个类，这个类包含所有声明的样式，类似less.
 
@@ -168,18 +188,6 @@ module.exports = {
 </template>
 <script src="./hello.js"></script>
 <script src="./hello.css"></script>
-```
-
-对于单页面组件，data需要声明为一个方法
-
-```javascript
-export default {
-  data: () => {//箭头函数，对匿名函数/行内行数的this指向问题做了修改。箭头函数this指向声明当前函数的上下文所在的域，行内行数指向的是该上下文父级域（这段总结来自某次阿里面试，对面那个大佬教的=_=），其实vue的官方文档里说了最好不要用箭头函数
-    return {
-      name: "wujie"
-    }
-  }
-}
 ```
 
 对于CSS，还可以使用computed来声明
@@ -243,6 +251,7 @@ v-text="name"和使用{{name}}的效果一样，主要用于操作元素中的�
 1. 这里的双引号不是字符串的意思，而是vue自定义的划定界限的符号。如果需要输出字符串，就需要在里面再添加单引号。
 2. {{}}代表的就是“”
 3. 当网速很慢或者js报错的时候，{{name}}会直接在页面上渲染出来，而使用v-text时，如果出错是不会显示的
+4. 如果你想用unicode的特殊字符，比如说&#9660；&#9658; 这种图标的话，那么v-text是不管用的，只能用{{}}才能正常渲染出来。我不知道这是不是vue的一个缺陷。
 
 #### v-html:
 
@@ -340,6 +349,47 @@ v-on:click="handleClick('test')"
 
 
 
-## 自定义指令
+## 事件修饰符
 
-## 事件处理
+vue提供了一些可选的事件修饰符，可以和v-on一起使用，使你所绑定的事件执行某些事先规定的操作。
+
+这些东西适用于：方法只有纯粹的数据逻辑，而不是去处理DOM事件细节。
+
+这些修饰符包括：
+
+- .stop
+- .prevent
+- .capture
+- .self
+- .once
+- .passive
+
+举例：
+
+```html
+<a v-on:clicl.stop = 'dothis'>阻止单击事件继续传播</a>
+<form v-on:submit.prevent = "formSubmitted">提交事件而不再重载页面</form>
+<a v-on:click.stop.prevent='dothis'>修饰符之间可以串联</a>
+
+<!-- 添加事件监听器时使用事件捕获模式 -->
+<!-- 即元素自身触发的事件先在此处理，然后才交由内部元素进行处理 -->
+<div v-on:click.capture="doThis">...</div>
+
+<!-- 只当在 event.target 是当前元素自身时触发处理函数 -->
+<!-- 即事件不是从内部元素触发的（内部元素通过$emit('click')可以触发） -->
+<div v-on:click.self="doThat">...</div>
+
+<!-- 点击事件将只会触发一次 -->
+<a v-on:click.once="doThis"></a>
+
+<!-- 滚动事件的默认行为 (即滚动行为) 将会立即触发 -->
+<!-- 而不会等待 `onScroll` 完成  -->
+<!-- 这其中包含 `event.preventDefault()` 的情况 -->
+<div v-on:scroll.passive="onScroll">...</div>
+```
+
+使用修饰符时，顺序很重要；相应的代码会以同样的顺序产生。因此，用 v-on:click.prevent.self会阻止**所有的点击**，而 `v-on:click.self.prevent` 只会阻止对元素自身的点击。
+
+如果.passive和.prevent一起使用，.prevent将会被忽略，.passive会告诉浏览器你不想阻止事件的默认行为。
+
+##  按键修饰符

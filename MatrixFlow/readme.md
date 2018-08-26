@@ -1,6 +1,8 @@
 # Matrix Flow
 
-<video src="MatrixFlow.mp4"></video>
+![MatrixFlow](MatrixFlow.gif)
+
+
 
 使用P5.js这个库实现了一下黑客帝国的这个效果，P5实在是太强大了。
 

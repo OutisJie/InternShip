@@ -271,7 +271,7 @@ data: {
 
 ##### XSS攻击是什么？
 
-​	跨站脚本攻击（Cross Site Scripting）, XSS攻击通常指的是通过利用网页开发是留下的漏洞，恶意攻击者往Web页面插入恶意Script代码，当用户浏览时，嵌入其中Web里面的script代码会被执行，从而达到恶意攻击用户的目的。
+	跨站脚本攻击（Cross Site Scripting）, XSS攻击通常指的是通过利用网页开发是留下的漏洞，恶意攻击者往Web页面插入恶意Script代码，当用户浏览时，嵌入其中Web里面的script代码会被执行，从而达到恶意攻击用户的目的。
 
 危害：
 
@@ -393,3 +393,94 @@ vue提供了一些可选的事件修饰符，可以和v-on一起使用，使你�
 如果.passive和.prevent一起使用，.prevent将会被忽略，.passive会告诉浏览器你不想阻止事件的默认行为。
 
 ##  按键修饰符
+
+在监听键盘事件的时候，可以通过keyCode来检测。不过要记住所有的keyCode比较困难，所以Vue为最常用的按键提供了别名，全部的按键包括：
+
+`.enter .tab .delete .esc .space .up .down .left .right`
+
+```html
+<!--只有在‘keyCode’是13的时候调用‘vm.submit()’-->
+<input v-on:keyup.13="submit">
+
+<input v-on:keyup.enter="submit">
+
+<!--缩写语法-->
+<input @keyup.enter="submit">
+```
+
+我们也可以通过全局`config.keyCode`对象来自定义按键修饰符的别名：
+
+```vue
+Vue.config.keyCodes.f1 = 12
+```
+
+如果想使用类似于ctrl+C这种组合键，Vue提供了四个修饰符来实现仅在按下相应按键时才会触发鼠标或键盘事件的监听器：
+
+`.ctrl .alt .shift .meta`
+
+```html
+<!--Alt+C-->
+<input @keyup.alt.67="clear">
+
+<!--Ctrl+Click-->
+<div @click.ctrl="doSomething">
+    do something
+</div>
+```
+
+### .exact修饰符
+
+如果使用普通的按键修饰符来监听组合键，那么当多余的按键被按下时也会触发，.exact 解决了这个问题
+
+```html
+<!--即使Alt或Shift被一同按下的时候也会触发-->
+<button @click.ctrl='onClick'>A</button>
+
+<!--当且仅当ctrl被按下的时候会触发-->
+<button @click.ctrl='onClick'>A</button>
+
+<!-- 没有任何系统修饰符被按下的时候才触发 -->
+<button @click.exact="onClick">A</button>
+```
+
+### 鼠标按钮修饰符
+
+- .left
+- .right
+- .middle
+
+
+
+## V-model
+
+### 表单
+
+可以使用v-model指令在表单<input>、<textare>、<select>元素上创建双向的数据绑定，它会根据控件的类型自动选取正确的方法来更新元素。v-model本质上是语法糖，它有如下的缺点：
+
+- v-model会忽略所有的表单元素的value、checked、selected特性的初始值，而是将Vue实例的数据对象作为数据来源更新页面。所以初始值需要在data属性中事先声明
+- 在使用输入法编辑的时候，在输入法组合文字的过程中，页面不会得到更新。不过input事件好像可以实现
+
+### 文本、复选框、单选框、选择框
+
+这部分的内容比较简单而且很难总结，所以我就直接贴一个链接得了，[啦啦啦😂](https://cn.vuejs.org/v2/guide/forms.html)
+
+### 修饰符
+
+- .lazy：默认情况下，v-model在每次input事件触发后将输入框的值与数据进行同步。使用lazy后可以变为change事件触发才进行同步
+
+  ```html
+  <!--在change时而非input时更新（大概效果是你输入完之后才会更新）-->
+  <input v-model.lazy="msg">
+  ```
+
+- .number：可以将输入的值转换为数值类型，因为即使是使用type="number"，输入的数字还是会被转换为字符串。
+
+  ```html
+  <input v-model.number="age" type="number">
+  ```
+
+- .trim：可以自动过滤掉用户输入的首位空白字符
+
+  ```html
+  <input v-model.trim="msg">
+  ```

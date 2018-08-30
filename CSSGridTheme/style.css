@@ -140,11 +140,20 @@ li{
     }
 
     .content-wrap, #section-b ul{
-        grid-column: 2/4;
+        grid-column: 1/5;
     }
     
 
     .box, #main-footer{
         grid-column: span 2;
+    }
+
+    #section-b ul{
+        display: flex;
+        justify-content: space-around;
+    }
+
+    #section-b li{
+        width: 31%;
     }
 }

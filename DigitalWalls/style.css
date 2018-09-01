@@ -1,35 +1,121 @@
+
+*, *::before, *::after{
+    box-sizing: border-box;
+}
+
 body{
+    height: 100%;
+    min-height: 100vh;
     margin: auto;
-    background: #333;
+    background: #121519;
     color: #fff;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1em;
-    line-height: 1.5;
+    font-family: "Montserrat", "Roboto", "Droid Sans", "Helvetica Neue", sans-serif;
+    /* font-size: 1em; */
+    line-height: 1;
     text-align: center;
+    /* overflow: hidden; */
+
+    display: grid;
+    grid-template-rows: 4rem auto 4rem;
+    grid-template-columns: 20% auto;
+}
+
+header{
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1)
+}
+
+footer{
+    border-top: 1px solid rgba(255, 255, 255, 0.1)
+}
+
+footer p{
+    margin-right: 1em;
+}
+
+header, footer{
+    font-size: 0.75rem;
+    font-weight: 200;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #a0a0a0;
+
+    display: flex;
+    grid-column: 1/-1;
+    padding: 0 2rem;
+    justify-content: space-between;
+}
+
+
+header .header-left, .header-right{
+    display: flex;
+    align-items: center;
+}
+
+footer .footer-left, .footer-right{
+    display: flex;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 200;
 }
 
 nav{
-    width: 20%;
     margin: 0;
     padding: 0;
+    display: block; 
+    grid-column: 1/2;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-nav .nav-content{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 2em;
-    border-top: 1px solid #666;
-    border-right: 1px solid #666;
+nav .nav-content:not(:last-child){
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+nav .nav-link{
+    display: flex;
+    align-items: center;
+    padding: 2rem;
 }
 
 nav a{
     color: #fff;
-    text-decoration: none;
+    font-weight: 200;
 }
 
-nav a img{
-    width: 100%;
-    height: 100%;
-    border-radius: 5px;
+nav img{
+    display:  block;
+    height: 60px;
+    width: 60px;
+    margin-right: 1em;
+    border-radius: 0.25rem;
+    object-position: center center;
+    object-fit: cover;
 }
 
+nav p{
+    margin: 0;
+    text-align: initial;
+}
+
+strong{
+    font-weight: bolder;
+}
+
+/*main section*/
+
+.section-back{
+    background-image: url(https://lonelyplanetimages.imgix.net/mastheads/stock-photo-st-stephens-church-112868985.jpg?sharp=10&w=2000);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    position: absolute;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    height: 500px;
+
+
+}

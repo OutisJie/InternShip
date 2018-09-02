@@ -4,7 +4,7 @@
 }
 
 body{
-    height: 100%;
+    height: 100vh;
     min-height: 100vh;
     margin: auto;
     background: #121519;
@@ -115,7 +115,7 @@ main{
     position: relative;
     /* margin-bottom: 750px; */
     min-height: calc(100vh - 4rem - 4rem);
-    padding-top: 350px; 
+    padding-top: 300px; 
 }
 
 .section-back{

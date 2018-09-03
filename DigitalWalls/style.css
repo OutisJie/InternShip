@@ -310,3 +310,56 @@ main{
     object-fit: cover;
     border-radius: 0.5rem;
 }
+
+
+.scrollctrl{
+    display: flex;
+    border-radius:50%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color:rgba(255, 255, 255, 0.7);
+    background-color:transparent;
+
+    width: 50vw;
+    height: 50vw;
+    justify-content: center;
+
+    position: fixed;
+    left: 50%;
+    /* transform: translateX(-50%) */
+    margin-left: -25%;
+    padding: 0;
+}
+
+.scrollctrl:hover, .scrollctrl:focus{
+    background-color: rgba(255, 255, 255, 0.035);
+}
+
+.scrollctrl-prev{
+    top: 0;
+    padding-top: 44%;
+    justify-self: flex-end;
+    transform: translateY(-42vw)
+
+}
+
+.scrollctrl-next{
+    bottom:0;
+    padding-bottom:44%;
+    transform:translateY(42vw);
+
+}
+
+.arrow{
+    display: inline-block;
+    border-style:solid;
+    padding:8px;
+    border-width: 0 1px 1px 0;
+}
+.arrow-up{
+    transform: rotate(-135deg);
+}
+
+.arrow-down{
+    transform: rotate(45deg);
+
+}

@@ -182,7 +182,7 @@ main{
 
 }
 
-.section-control button:focus{
+ button:focus{
     outline: 0;
     border-color: #66AEE5;
     box-shadow: 0 0 0 1px #66AEE5;
@@ -328,6 +328,7 @@ main{
     /* transform: translateX(-50%) */
     margin-left: -25%;
     padding: 0;
+    outline: 0;
 }
 
 .scrollctrl:hover, .scrollctrl:focus{

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS Challenge Day1</title>
+
+</head>
+
+<body>
+    <div class="box">
+        <div class="btn not-active">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</body>
+
+<style>
+    .box {
+        height: 400px;
+        width: 400px;
+        background: #3faf82;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 10%;
+        box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.3)
+    }
+
+    .btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        /* height: 80px;*/
+        width: fit-content;
+        transform: translate(-50%, -50%);
+        cursor: pointer;
+    }
+
+    span {
+        display: block;
+        height: 8px;
+        width: 80px;
+        background: #ffffff;
+        position: relative;
+        border-radius: 3px;
+        box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .3);
+        transition: all 0.3s;
+    }
+
+    span+span {
+        margin-top: 14px;
+    }
+
+
+    .active span:nth-child(1) {
+        animation: ease 0.7s top-1 forwards;
+    }
+
+    .not-active span:nth-child(1) {
+        animation: ease 0.7s top-2 forwards;
+    }
+
+    .active span:nth-child(2) {
+        animation: ease 0.7s scaled-1 forwards;
+    }
+
+    .not-active span:nth-child(2){
+        animation: ease 0.7s scaled-2 forwards;
+    }
+
+    .active span:nth-child(3){
+        animation: ease 0.7s bottom-1 forwards;
+    }
+
+    .not-active span:nth-child(3){
+        animation: ease 0.7s bottom-2 forwards;
+    }
+
+    @keyframes top-1 {
+        0% {
+            top: 0;
+            transform: rotate(0);
+        }
+
+        50% {
+            top: 22px;
+            transform: rotate(0);
+        }
+
+        100% {
+            top: 22px;
+            transform: rotate(45deg);
+        }
+    }
+
+    @keyframes top-2 {
+        0% {
+            top: 22px;
+            transform: rotate(45deg);
+        }
+
+        50% {
+            top: 22px;
+            transform: rotate(0deg);
+        }
+
+        100% {
+            top: 0;
+            transform: rotate(0deg);
+        }
+    }
+
+    @keyframes scaled-1 {
+        50% {
+            transform: scale(0)
+        }
+        100% {
+            transform: scale(0)
+        }
+    }
+
+    @keyframes scaled-2 {
+        0% {
+            transform: scale(0);
+        }
+        50% {
+            transform: scale(0);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    @keyframes bottom-1 {
+        0% {
+            bottom: 0;
+            transform: rotate(0);
+        }
+        50% {
+            bottom: 22px;
+            transform: rotate(0);
+        }
+        100% {
+            bottom: 22px;
+            transform: rotate(135deg);
+        }
+    }
+
+    @keyframes bottom-2 {
+        0% {
+            bottom: 22px;
+            transform: rotate(135deg);
+        }
+        50% {
+            bottom: 22px;
+            transform: rotate(0);
+        }
+        100% {
+            bottom: 0px;
+            transform: rotate(0);
+        }
+    }
+
+</style>
+
+<script>
+    const element = document.querySelector('.btn');
+    console.log(element);
+
+    element.addEventListener("click", () => {
+        element.classList.toggle('active');
+        element.classList.toggle('not-active');
+        console.log(element.classList)
+    })
+</script>
+
+</html>

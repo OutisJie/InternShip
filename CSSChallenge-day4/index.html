@@ -28,11 +28,62 @@
                 <div class="line line-1"></div>
                 <div class="line line-2"></div>
                 <div class="line line-3"></div>
-                <div class="data red">
 
+                <div class="data red">
+                    <svg>
+                        <polyline points="9,46 50,12 90,23 130,11 171,38 211,48 251,19"></polyline>
+                    </svg>
+                    <div class="points">
+                        <div class="point-1">
+                            <div class="tooltip">458</div>
+                        </div>
+                        <div class="point-2">
+                            <div class="tooltip">812</div>
+                        </div>
+                        <div class="point-3">
+                            <div class="tooltip">746</div>
+                        </div>
+                        <div class="point-4">
+                            <div class="tooltip">877</div>
+                        </div>
+                        <div class="point-5">
+                            <div class="tooltip">517</div>
+                        </div>
+                        <div class="point-6">
+                            <div class="tooltip">434</div>
+                        </div>
+                        <div class="point-7">
+                            <div class="tooltip">458</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="data blue">
-
+                    <svg>
+                        <polyline points="9,61 50,50 90,65 130,55 171,61 211,74 251,64"></polyline>
+                    </svg>
+                    <div class="points">
+                        <div class="point-1">
+                            <div class="tooltip">26</div>
+                        </div>
+                        <div class="point-2">
+                            <div class="tooltip">41</div>
+                        </div>
+                        <div class="point-3">
+                            <div class="tooltip">22</div>
+                        </div>
+                        <div class="point-4">
+                            <div class="tooltip">36</div>
+                        </div>
+                        <div class="point-5">
+                            <div class="tooltip">25</div>
+                        </div>
+                        <div class="point-6">
+                            <div class="tooltip">13</div>
+                        </div>
+                        <div class="point-7">
+                            <div class="tooltip">20</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="days">
@@ -139,13 +190,13 @@
 
     .statistic {
         position: relative;
-		height: 81px;
-		width: 260px;
-		margin: 0 auto;
-        
+        height: 81px;
+        width: 260px;
+        margin: 0 auto;
+
     }
 
-    .line{
+    .line {
         position: absolute;
         left: 0;
         right: 0;
@@ -153,20 +204,165 @@
         background: #F2F2F2;
     }
 
-    .line-1{
+    .line-1 {
         top: 0;
     }
 
-    .line-2{
+    .line-2 {
         top: 40px;
     }
 
-    .line-3{
+    .line-3 {
         bottom: 0;
     }
 
-    .data{
-        
+    .data svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    .data polyline {
+        fill: none;
+        stroke-width: 2px;
+        stroke-linecap: round;
+    }
+
+    .data.red polyline {
+        stroke: #FA7373;
+    }
+
+    .data.blue polyline {
+        stroke: #7BA2FF;
+    }
+
+    .tooltip {
+        position: absolute;
+        bottom: 13px;
+        left: 50%;
+        transform: translate3d(-50%, 10px, 0);
+        font-weight: 600;
+        font-size: 11px;
+        line-height: 11px;
+        color: #fff;
+        padding: 8px 6px;
+        border-radius: 3px;
+        visibility: hidden;
+        opacity: 0;
+        transition: transform 0.4s ease-out 0s, opacity 0.4s ease-out 0s;
+
+    }
+
+    .tooltip::after {
+        position: absolute;
+        display: block;
+        content: '';
+        height: 6px;
+        width: 6px;
+        left: 50%;
+        margin-left: -3px;
+        bottom: -3px;
+        transform: rotate(45deg);
+    }
+
+    [class^='point-'] {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    [class^='point-']:hover .tooltip {
+        visibility: visible;
+        opacity: 1;
+        transform: translate3d(-50%, 0, 0);
+    }
+
+    .data.red [class^="point-"],
+    .data.red .tooltip,
+    .data.red .tooltip:after {
+        background: #FA7373;
+    }
+
+    .data.red .point-1 {
+        left: 7px;
+        top: 43px;
+    }
+
+    .data.red .point-2 {
+        left: 48px;
+        top: 9px;
+    }
+
+    .data.red .point-3 {
+        left: 88px;
+        top: 20px;
+    }
+
+    .data.red .point-4 {
+        left: 128px;
+        top: 8px;
+    }
+
+    .data.red .point-5 {
+        left: 169px;
+        top: 35px;
+    }
+
+    .data.red .point-6 {
+        left: 209px;
+        top: 45px;
+    }
+
+    .data.red .point-7 {
+        left: 249px;
+        top: 16px;
+    }
+
+    .data.blue [class^="point-"],
+    .data.blue .tooltip,
+    .data.blue .tooltip:after {
+        background: #7BA2FF;
+    }
+
+
+    .data.blue .point-1 {
+        left: 7px;
+        top: 58px;
+    }
+
+    .data.blue .point-2 {
+        left: 48px;
+        top: 47px;
+    }
+
+    .data.blue .point-3 {
+        left: 88px;
+        top: 62px;
+    }
+
+    .data.blue .point-4 {
+        left: 128px;
+        top: 52px;
+    }
+
+    .data.blue .point-5 {
+        left: 169px;
+        top: 58px;
+    }
+
+    .data.blue .point-6 {
+        left: 209px;
+        top: 71px;
+    }
+
+    .data.blue .point-7 {
+        left: 249px;
+        top: 61px;
     }
 </style>
 

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Css Challenge Day6</title>
+</head>
+
+<body>
+    <div class="box">
+        <div class="panel">
+            <div class="header">
+                <div class="menu-icon">
+                    <div class="dash-top"></div>
+                    <div class="dash-bottom"></div>
+                    <div class="dash-cicle"></div>
+                </div>
+                <span class="title">Notification</span>
+                <input type="text" class="search-input" placeholder="Search...">
+                <div class="search-icon"> &#8981;</div>
+            </div>
+            <div class="notifications">
+                <div class="line"></div>
+                <div class="notification">
+                    <div class="circle"></div>
+                    <span class="time">9:24 AM</span>
+                    <p><b>John Walker</b> posted a photo on your wall.</p>
+                </div>
+                <div class="notification">
+                    <div class="circle"></div>
+                    <span class="time">9:24 AM</span>
+                    <p><b>John Walker</b> posted a photo on your wall.</p>
+                </div>
+                <div class="notification">
+                    <div class="circle"></div>
+                    <span class="time">9:24 AM</span>
+                    <p><b>John Walker</b> posted a photo on your wall.</p>
+                </div>
+            </div>
+        </div>
+        <div class="menu">
+            <ul>
+                <li><span class="fa fa-dashboard"></span>Dashboard</li>
+                <li><span class="fa fa-user"></span>Profile</li>
+                <li><span class="fa fa-bell"></span>Notification</li>
+                <li><span class="fa fa-message"></span>Message</li>
+                <li><span class="fa fa-setting"></span>Setting</li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+<style>
+    .box {
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #264057;
+        color: #666666;
+        box-shadow: 1px 2px 10px 0 rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+    }
+
+    .panel {
+        width: 300px;
+        height: 300px;
+        background: #fff;
+        position: absolute;
+        top: 50px;
+        left: 50px;
+        transition: all 0.5s ease-in-out;
+        border-radius: 3px;
+        box-shadow: 10px 10px 15px 0 rgba(0, 0, 0, 0.3);
+        z-index: 2;
+    }
+
+    .header {
+        height: 60px;
+        width: 100%;
+        background: #5F98CD;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #fff;
+
+    }
+
+    .menu-icon {
+        width: 30px;
+        height: 15px;
+        cursor: pointer;
+        margin-left: 20px;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .menu-icon:hover .dash-top,
+    .menu-icon:hover .dash-cicle,
+    .menu-icon:hover .dash-bottom {
+        background: #fff;
+    }
+
+    .search-input {
+        box-sizing: border-box;
+        position: absolute;
+        top: 13px;
+        right: 55px;
+        width: 230px;
+        height: 34px;
+        border-radius: 17px;
+        border: none;
+        background: #fff;
+        padding: 0 17px;
+        font-size: 13px;
+        color: #666;
+        transition: all .3s ease-in-out;
+        transform: translateX(15px);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .active {
+        transform: translateX(0);
+        opacity: 1;
+        pointer-events: all
+    }
+
+
+    .search-icon {
+        font-size: 30px;
+        color: #B2DAFF;
+        transition: all .3s ease;
+        cursor: pointer;
+        margin-right: 20px;
+    }
+
+    .search-icon:hover {
+        color: #fff;
+    }
+
+    .dash-top {
+        width: 30px;
+        height: 3px;
+        background: #B2DAFF;
+        border-radius: 3px;
+        margin-top: 1px;
+        transition: all .2s ease-in-out;
+    }
+
+    .dash-cicle {
+        height: 7px;
+        width: 7px;
+        border-radius: 4px;
+        background: #B2DAFF;
+        transition: all .2s ease-in-out;
+    }
+
+    .dash-bottom {
+        position: absolute;
+        width: 30px;
+        height: 3px;
+        bottom: 0;
+        background: #B2DAFF;
+        border-radius: 3px;
+        transition: all .2s ease-in-out;
+        margin-bottom: 0px;
+        margin-top: auto;
+    }
+
+    .notifications {
+        position: relative;
+        display: grid;
+        height: 240px;
+        grid-template-rows: 33% 33% 33%;
+    }
+
+    .line {
+        position: absolute;
+        top: 0;
+        left: 27px;
+        bottom: 0;
+        width: 3px;
+        background: #EBEBEB;
+    }
+
+    .notification {
+        position: relative;
+        margin: 25px 20px 25px 43px;
+    }
+
+    .notification:hover {
+        color: #5F98CD;
+        cursor: pointer;
+    }
+
+    .notification:nth-child(2) {
+        animation: here-am-i 0.5s ease-out 0.4s;
+        animation-fill-mode: both;
+    }
+
+    .notification:nth-child(3) {
+        animation: here-am-i 0.5s ease-out 0.6s;
+        animation-fill-mode: both;
+    }
+
+    .notification:nth-child(4) {
+        animation: here-am-i 0.5s ease-out 0.8s;
+        animation-fill-mode: both;
+    }
+
+    .circle {
+        box-sizing: border-box;
+        position: absolute;
+        height: 11px;
+        width: 11px;
+        background: #fff;
+        border: 2px solid #5F98CD;
+        box-shadow: 0 0 0 3px #fff;
+        border-radius: 6px;
+        left: -20px;
+    }
+
+    .time {
+        display: block;
+        font-size: 11px;
+        line-height: 11px;
+        margin-bottom: 2px;
+    }
+
+    p {
+        font-size: 15px;
+        line-height: 20px;
+        margin: 0;
+    }
+
+    @keyframes here-am-i {
+        from {
+            transform: translate3d(0, 50px, 0);
+            opacity: 0;
+        }
+
+        to {
+            transform: translate3d(0, 0, 0);
+            opacity: 1;
+        }
+    }
+
+    .menu {
+        position: absolute;
+        width: 170px;
+        height: 270px;
+        top: 65px;
+        left: 50px;
+        background: #43627D;
+        border-radius: 3px;
+        transition: all .5s ease-in-out;
+        transform: translate3d(20px, 0, 0);
+    }
+
+    ul {
+        margin: 0;
+        padding: 10px 0;
+    }
+
+    ul li {
+        color: #93B2CD;
+        margin: 0;
+        padding: 18px 17px;
+        list-style: none;
+        font-size: 14px;
+        line-height: 14px;
+        cursor: pointer;
+        transition: all .3s ease-in-out;
+        display: flex;
+        align-items: center;
+    }
+    li span{
+        display: block;
+        border: solid 1px #93B2CD;
+        height: 5px;
+        width: 5px;
+        margin-right: 10px
+    }
+    ul li:hover {
+        color: #fff;
+        background: #385269;
+    }
+    ul li:hover span{
+        border: solid 1px #fff;
+    }
+
+    .show-menu{
+        transform: translate3d(150px,0,0);
+    }
+
+    .active1{
+        box-shadow: 5px 5px 8px 0 rgba(0,0,0,0.2);
+		transform: translate3d(0,0,0);
+    }
+
+</style>
+
+<script>
+    const search = document.querySelector(".search-icon");
+    const input = document.querySelector(".search-input");
+    const menu = document.querySelector(".menu-icon");
+    const panel = document.querySelector(".panel");
+    const menu_panel = document.querySelector(".menu");
+    search.addEventListener("click", e => {
+        input.classList.toggle("active");
+    });
+    menu.addEventListener("click", e => {
+        panel.classList.toggle("show-menu");
+        menu_panel.classList.toggle("active1");
+    })
+
+
+</script>
+
+</html>

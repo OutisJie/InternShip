@@ -2,7 +2,7 @@ AngularJs/node_modules/
 P5WorkFlow/.vscode/
 
 vue3-example/node_modules/
-.vscode
+
 .DS_Store
 node_modules
 /dist
@@ -18,7 +18,7 @@ yarn-error.log*
 
 # Editor directories and files
 .idea
-.vscode
+/.vscode
 *.suo
 *.ntvs*
 *.njsproj

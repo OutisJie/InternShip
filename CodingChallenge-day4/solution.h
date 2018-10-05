@@ -7,12 +7,12 @@ private:
 	vector<int> nums;
 	int target;
 public:
-	Solution(vector<int> nums, int target);
+	Solution(const vector<int>& nums, int target);
 	vector<int> getResult();
 	~Solution();
 };
 
-Solution::Solution(vector<int> nums, int target)
+Solution::Solution(const vector<int>& nums, int target)
 {
 	this->nums = nums;
 	this->target = target;

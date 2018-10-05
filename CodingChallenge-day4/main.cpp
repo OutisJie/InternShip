@@ -22,6 +22,7 @@ vector<int> getVector(string input) {
 	}
 	return arr;
 }
+
 int main() {
 	string inputArray;
 	int target;

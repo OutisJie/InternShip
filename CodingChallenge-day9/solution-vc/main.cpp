@@ -33,6 +33,28 @@ int *buildSuffixArrary(string input, const int n) {
 	return suffixArr;
 }
 
+void search(string pattern, string input, int *suffArr, int n) {
+	int m = pattern.length();
+	//¶ş·Ö²éÕÒ
+	int left = 0, right = n - 1;
+	while (left <= right) {
+		int mid = left + (right - 1) / 2;
+		int res = strncmp(&pattern[0], &input[suffArr[mid]], m);
+
+		if (res == 0) {
+			cout << "Pattern found at index: " << suffArr[mid];
+			return;
+		}
+		else if (res < 0) {
+			right = mid - 1;
+		}
+		else if (res > 0) {
+			left = mid + 1;
+		}
+	}
+	cout << "Pattern not found";
+}
+
 int main() {
 	string input;
 	while (getline(cin, input))
@@ -42,6 +64,9 @@ int main() {
 		for (int i = 0; i < n; i++) {
 			cout << suffixArr[i] << " ";
 		}
+		string pattern;
+		getline(cin, pattern);
+		search(pattern, input, suffixArr, n);
 		cout << endl;
 	}
 	return 0;

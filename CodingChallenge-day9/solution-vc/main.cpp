@@ -2,36 +2,9 @@
 #include <string>
 #include <algorithm>
 #include <vector>
+#include "solution1.h"
+#include "solution2.h"
 using namespace std;
-
-typedef struct suffix Suffix;
-//structure to store information of a suffix
-struct suffix {
-	int index;
-	char *suff;
-};
-
-//a comparison function used by sort() to compare two suffixes
-int cmp(Suffix a, Suffix b) {
-	return strcmp(a.suff, b.suff) < 0 ? 1 : 0;
-}
-
-int *buildSuffixArrary(string input, const int n) {
-	//store suffixes
-	vector<Suffix> suffixes(n);
-	for (int i = 0; i < n; i++) {
-		suffixes[i].index = i;
-		suffixes[i].suff = &input[i];
-	}
-	//sort the suffixes using the comparison function
-	sort(suffixes.begin(), suffixes.end(), cmp);
-	//store indexes of all sorted suffixes in the suffix array
-	int *suffixArr = new int[n];
-	for (int i = 0; i < n; i++) {
-		suffixArr[i] = suffixes[i].index;
-	}
-	return suffixArr;
-}
 
 void search(string pattern, string input, int *suffArr, int n) {
 	int m = pattern.length();
@@ -57,16 +30,28 @@ void search(string pattern, string input, int *suffArr, int n) {
 
 int main() {
 	string input;
+	Solution1 *solution1 = new Solution1();
+	Solution2 *solution2 = new Solution2();
 	while (getline(cin, input))
 	{
 		int n = input.length();
-		int *suffixArr = buildSuffixArrary(input, n);
+		int *suffixArr1 = solution1->buildSuffixArray(input, n);
+		int *suffixArr2 = solution2->buildSuffixArray((char*)input.c_str(), n);
+		cout << "solution1: ";
 		for (int i = 0; i < n; i++) {
-			cout << suffixArr[i] << " ";
+			cout << suffixArr1[i] << " ";
 		}
+		cout << endl;
+		cout << "solution2: ";
+		for (int i = 0; i < n; i++) {
+			cout << suffixArr2[i] << " ";
+		}
+		cout << endl;
+
 		string pattern;
 		getline(cin, pattern);
-		search(pattern, input, suffixArr, n);
+		search(pattern, input, suffixArr1, n);
+		search(pattern, input, suffixArr2, n);
 		cout << endl;
 	}
 	return 0;
